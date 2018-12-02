@@ -4,6 +4,9 @@
 $ npm install
 ```
 
+## PostMan
+[api doc](https://web.postman.co/collections/1989061-f67fe7a6-27a0-ee4a-ae1b-98975b3c69e2?workspace=ad15bbd6-308c-4abf-8cbe-7337f714c43a)
+
 ## Running the app
 
 ```bash

@@ -1,4 +1,4 @@
-import { Controller, Get, Req, Post, Body, Res } from '@nestjs/common';
+import { Controller, Get, Req, HttpCode, Post, Body, Res, HttpStatus, Param } from '@nestjs/common';
 import { CreateCatDto } from './dto/create-cat.dto';
 import { CatsService } from './cats.service';
 
@@ -16,9 +16,15 @@ export class CatsController {
     return this.catsService.findAll();
   }
 
+  @Get(':id')
+  findOne(@Param('id') id) {
+    return this.catsService.findOne(id);
+  }
+
   // 同理
   @Post()
-  create(@Body() createCatDto: CreateCatDto){
+  @HttpCode(HttpStatus.CREATED)
+  async create(@Body() createCatDto: CreateCatDto){
     this.catsService.create(createCatDto);
   }
 }
