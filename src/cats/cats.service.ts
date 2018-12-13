@@ -1,5 +1,4 @@
-import { Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
+import { Injectable, Inject } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { Cat } from './interfaces/cat.interface';
 import { CreateCatDto } from './dto/create-cat.dto';
@@ -8,7 +7,8 @@ import { CreateCatDto } from './dto/create-cat.dto';
 @Injectable()
 export class CatsService {
   constructor(
-    @InjectModel('Cat') private readonly catModel: Model<Cat>,       // 注入 Cat 模型
+    @Inject('CatModelToken')
+    private readonly catModel: Model<Cat>,       // 注入 Cat 模型
   ){}
 
   async create(createCatDto: CreateCatDto) {

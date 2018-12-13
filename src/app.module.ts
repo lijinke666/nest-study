@@ -4,13 +4,11 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CatsModule } from './cats/cats.module';
 import { CatsController } from './cats/cats.controller';
-import { MongooseModule } from '@nestjs/mongoose';
 
 // 这里有点像 angular 依赖注入
 @Module({
   imports: [
     CatsModule,
-    MongooseModule.forRoot('mongodb://localhost/nest'),     // => 等于  mongoose.connect(地址)
   ],
   // 注入所有的 控制器
   controllers: [AppController],
