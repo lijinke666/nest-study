@@ -22,8 +22,10 @@
   "dependencies": {
     "@nestjs/common": "^5.4.0",
     "@nestjs/core": "^5.4.0",
+    "@nestjs/mongoose": "^5.2.2",
     "class-transformer": "^0.2.0",
     "class-validator": "^0.9.1",
+    "mongoose": "^5.3.16",
     "reflect-metadata": "^0.1.12",
     "rimraf": "^2.6.2",
     "rxjs": "^6.2.2",

@@ -1,28 +1,25 @@
 import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 import { Cat } from './interfaces/cat.interface';
+import { CreateCatDto } from './dto/create-cat.dto';
 
 // controller 对应 要一个 service
 @Injectable()
 export class CatsService {
-  private readonly cats: Cat[] = [];
-  private id: number = 0;
+  constructor(
+    @InjectModel('Cat') private readonly catModel: Model<Cat>,       // 注入 Cat 模型
+  ){}
 
-  create(cat: Cat){
-    // TODO: 替换成 数据库的 create()
-    const _id = this.id ++;
-    this.cats.push({
-      ...cat,
-      id: _id,
-    });
-    return true;
+  async create(createCatDto: CreateCatDto) {
+    return await this.catModel.create(createCatDto);
   }
 
-  findAll(): Cat[] {
-    // TODO: 替换成 数据库 的 find()
-    return this.cats;
+  async findAll(): Promise<Cat[]> {
+    return await this.catModel.find().exec();
   }
 
-  findOne(id: number): Cat {
-    return this.cats.find((cat) => cat.id === id);
+  async findOne(id: string): Promise<Cat> {
+    return await this.catModel.findById(id).exec();
   }
 }
