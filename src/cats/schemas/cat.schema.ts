@@ -5,4 +5,6 @@ export const CatSchema = new mongoose.Schema({
   name: String,
   age: Number,
   type: String,
+}, {
+  timestamps: true,
 });
