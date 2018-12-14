@@ -25,8 +25,8 @@ export class CatsController {
 
   // 同理
   @Post()
-  @ApiResponse({ status: 201, description: '创建成功' })
-  @ApiResponse({ status: 403, description: 'Forbidden.' })
+  @ApiResponse({ status: HttpStatus.CREATED, description: '创建成功' })
+  @ApiResponse({ status: HttpStatus.FORBIDDEN, description: 'Forbidden.' })
   @HttpCode(HttpStatus.CREATED)
   async create(@Body() createCatDto: CreateCatDto) {
     this.catsService.create(createCatDto);
