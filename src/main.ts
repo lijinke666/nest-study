@@ -1,9 +1,11 @@
+import * as session from 'express-session';
+import * as cookieParser from 'cookie-parser';
+import * as csurf from 'csurf';
+import * as rateLimit from 'express-rate-limit';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { registerSwagger } from './swagger';
-import * as csurf from 'csurf';
-import * as rateLimit from 'express-rate-limit';
 
 declare const module: any;
 
@@ -11,8 +13,23 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     cors: true,      // 跨域  内置的 cors 模块
   });
+  // Cookie
+  app.use(cookieParser());
+
+  // Session
+  app.use(
+    session({
+      secret: 'nest',
+      name: 'nest',
+      cookie: { maxAge: 1000 * 60 * 60 * 24 * 7 }, // 设置 cookie 7天后过期
+      resave: true,
+      rolling: true,
+      saveUninitialized: false,
+    }),
+  );
+
   // CSRF 跨站点请求伪造攻击
-  app.use(csurf());
+  // app.use(csurf());
 
   // 接口限速
   app.use(rateLimit({

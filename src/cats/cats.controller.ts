@@ -1,7 +1,8 @@
-import { Controller, Get, Req, HttpCode, Post, Body, Res, HttpStatus, Param } from '@nestjs/common';
+import { Controller, Get, Req, HttpCode, Post, Body, Res, HttpStatus, Param, Delete } from '@nestjs/common';
 import { CreateCatDto } from './dto/create-cat.dto';
 import { CatsService } from './cats.service';
 import { ApiUseTags, ApiResponse } from '@nestjs/swagger';
+import { FindOneParams } from './dto/find-one.dto';
 
 // 控制器("命名空间 ")
 @ApiUseTags('cats')
@@ -19,7 +20,7 @@ export class CatsController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id) {
+  findOne(@Param() {id}: FindOneParams) {
     return this.catsService.findOne(id);
   }
 
