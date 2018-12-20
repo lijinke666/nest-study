@@ -6,12 +6,14 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { registerSwagger } from './swagger';
+import { Log4jsService } from 'nest-log4js';
 
 declare const module: any;
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     cors: true,      // 跨域  内置的 cors 模块
+    logger: false,
   });
   // Cookie
   app.use(cookieParser());
@@ -42,6 +44,9 @@ async function bootstrap() {
 
   // Swagger
   registerSwagger(app)();
+
+  // logger
+  app.useLogger(app.get(Log4jsService));
 
   await app.listen(3000);
 

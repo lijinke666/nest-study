@@ -5,7 +5,9 @@ import { AppService } from './app.service';
 import { CatsModule } from './cats/cats.module';
 import { CatsController } from './cats/cats.controller';
 import { ConfigModule } from './config/config.module';
-import { APP_INTERCEPTOR } from '@nestjs/core';
+import { APP_INTERCEPTOR, APP_FILTER } from '@nestjs/core';
+import { Log4jsModule, Log4jsInterceptor } from 'nest-log4js';
+import { HttpExceptionFilter } from './filters/http-exception.filter';
 
 // 其实就是 angular 依赖注入
 @Module({
@@ -14,6 +16,10 @@ import { APP_INTERCEPTOR } from '@nestjs/core';
     ConfigModule,
     CatsModule,
     CacheModule.register(),
+    Log4jsModule.forRoot({
+      appenders: { cheese: { type: 'file', filename: 'cheese.log' } },
+      categories: { default: { appenders: ['cheese'], level: 'error' } },
+    }),
   ],
   // 注入所有的 控制器
   controllers: [AppController],
@@ -23,6 +29,14 @@ import { APP_INTERCEPTOR } from '@nestjs/core';
     {
       provide: APP_INTERCEPTOR,
       useClass: CacheInterceptor,
+    },
+    {
+      provide: 'LOG4JS_INTERCEPTOR',
+      useClass: Log4jsInterceptor,
+    },
+    {
+      provide: APP_FILTER,
+      useClass: HttpExceptionFilter,
     },
   ],
 })

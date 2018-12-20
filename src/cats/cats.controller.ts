@@ -1,8 +1,9 @@
-import { Controller, Get, Req, HttpCode, Post, Body, Res, HttpStatus, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Req, HttpCode, Post, Body, Res, HttpStatus, Param, Delete, UseFilters } from '@nestjs/common';
 import { CreateCatDto } from './dto/create-cat.dto';
 import { CatsService } from './cats.service';
 import { ApiUseTags, ApiResponse } from '@nestjs/swagger';
 import { FindOneParams } from './dto/find-one.dto';
+import { HttpExceptionFilter } from '../filters/http-exception.filter';
 
 // 控制器("命名空间 ")
 @ApiUseTags('cats')
@@ -26,6 +27,7 @@ export class CatsController {
 
   // 同理
   @Post()
+  @UseFilters(new HttpExceptionFilter())
   @ApiResponse({ status: HttpStatus.CREATED, description: '创建成功' })
   @ApiResponse({ status: HttpStatus.FORBIDDEN, description: 'Forbidden.' })
   @HttpCode(HttpStatus.CREATED)
