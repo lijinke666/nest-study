@@ -7,6 +7,7 @@ import { CatsController } from './cats/cats.controller';
 import { ConfigModule } from './config/config.module';
 import { APP_INTERCEPTOR, APP_FILTER } from '@nestjs/core';
 import { Log4jsModule, Log4jsInterceptor } from 'nest-log4js';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { HttpExceptionFilter } from './filters/http-exception.filter';
 
 // 其实就是 angular 依赖注入
@@ -14,12 +15,13 @@ import { HttpExceptionFilter } from './filters/http-exception.filter';
   // 注入所有模块
   imports: [
     ConfigModule,
-    CatsModule,
+    // CatsModule,
     CacheModule.register(),
     Log4jsModule.forRoot({
       appenders: { cheese: { type: 'file', filename: 'cheese.log' } },
       categories: { default: { appenders: ['cheese'], level: 'error' } },
     }),
+    TypeOrmModule.forRoot(),      // 会去root 目录 涨到 ormconfig.json 读取配置
   ],
   // 注入所有的 控制器
   controllers: [AppController],
@@ -42,7 +44,7 @@ import { HttpExceptionFilter } from './filters/http-exception.filter';
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    // 引用 中间键
+    // 引用 中间键  只对于 Cats 控制器生效
     consumer
       .apply(LoggerMiddleware)
       .forRoutes(CatsController);

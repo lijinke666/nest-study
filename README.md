@@ -39,3 +39,19 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
+
+
+
+## 学习目标
+
+> cats 目录
+
+mongodb 相关的学习
+
+> users 目录
+
+mysql 相关的学习
+
+> musics 目录
+
+graphql 相关的学习
