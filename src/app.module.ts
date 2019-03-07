@@ -21,7 +21,7 @@ import { HttpExceptionFilter } from './filters/http-exception.filter';
       appenders: { cheese: { type: 'file', filename: 'cheese.log' } },
       categories: { default: { appenders: ['cheese'], level: 'error' } },
     }),
-    TypeOrmModule.forRoot(),      // 会去root 目录 涨到 ormconfig.json 读取配置
+    // TypeOrmModule.forRoot(),      // 会去root 目录 涨到 ormconfig.json 读取配置
   ],
   // 注入所有的 控制器
   controllers: [AppController],
@@ -46,7 +46,7 @@ export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     // 引用 中间键  只对于 Cats 控制器生效
     consumer
-      .apply(LoggerMiddleware)
-      .forRoutes(CatsController);
+      .apply(LoggerMiddleware);
+      // .forRoutes(CatsController);
   }
 }

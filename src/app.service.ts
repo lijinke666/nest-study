@@ -4,9 +4,11 @@ import { ConfigService } from './config/config.service';
 @Injectable()
 export class AppService {
   constructor(config: ConfigService){
-    console.log('@AppService-Config: \n', config);
+    console.log('\n@AppService-Config: ============================= \n');
+    console.log(config);
+    console.log('\n@AppService-Config: ============================= \n');
   }
   root(): string {
-    return 'Hello World!';
+    return '李金珂的 nest.js 学习';
   }
 }
