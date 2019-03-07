@@ -11,4 +11,5 @@ import { Users } from './users.entity';
   providers: [UsersService],
   controllers: [UsersController],
 })
-export class PhotoModule {}
+
+export class UsersModule {}

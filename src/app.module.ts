@@ -3,6 +3,7 @@ import { Module, NestModule, MiddlewareConsumer, CacheModule, CacheInterceptor }
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CatsModule } from './cats/cats.module';
+import { UsersModule } from './users/users.module';
 import { CatsController } from './cats/cats.controller';
 import { ConfigModule } from './config/config.module';
 import { APP_INTERCEPTOR, APP_FILTER } from '@nestjs/core';
@@ -22,6 +23,7 @@ import { HttpExceptionFilter } from './filters/http-exception.filter';
       categories: { default: { appenders: ['cheese'], level: 'error' } },
     }),
     // TypeOrmModule.forRoot(),      // 会去root 目录 涨到 ormconfig.json 读取配置
+    // UsersModule,
   ],
   // 注入所有的 控制器
   controllers: [AppController],
