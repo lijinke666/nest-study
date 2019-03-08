@@ -26,7 +26,7 @@ import { GraphQLModule } from '@nestjs/graphql';
     GraphQLModule.forRoot({
       include: [UsersModule],
       typePaths: ['./**/*.graphql'],
-      debug: true,
+      debug: false,
       playground: true,
     }),
     // TypeOrmModule.forRoot(),      // 会去root 目录 涨到 ormconfig.json 读取配置

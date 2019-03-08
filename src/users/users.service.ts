@@ -1,22 +1,20 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { Users } from './users.entity';
 import { User } from '../graphql.schema';
 
 @Injectable()
 export class UsersService {
   private readonly users: User[] = [{
-    id: '11',
+    id: '1',
     nickname: '李金珂',
     phone: '1818111111',
   }];
 
-  findAll(): Users[] {
+  findAll(): User[] {
     return this.users;
   }
 
   findOneById(id: string) {
+    console.log('@@@', id);
     return this.users.find(user => user.id === id);
   }
 
