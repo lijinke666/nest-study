@@ -10,6 +10,7 @@ import { APP_INTERCEPTOR, APP_FILTER } from '@nestjs/core';
 import { Log4jsModule, Log4jsInterceptor } from 'nest-log4js';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { HttpExceptionFilter } from './filters/http-exception.filter';
+import { GraphQLModule } from '@nestjs/graphql';
 
 // 其实就是 angular 依赖注入
 @Module({
@@ -21,6 +22,12 @@ import { HttpExceptionFilter } from './filters/http-exception.filter';
     Log4jsModule.forRoot({
       appenders: { cheese: { type: 'file', filename: 'cheese.log' } },
       categories: { default: { appenders: ['cheese'], level: 'error' } },
+    }),
+    GraphQLModule.forRoot({
+      include: [UsersModule],
+      typePaths: ['./**/*.graphql'],
+      debug: true,
+      playground: true,
     }),
     // TypeOrmModule.forRoot(),      // 会去root 目录 涨到 ormconfig.json 读取配置
     // UsersModule,
