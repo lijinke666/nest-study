@@ -25,7 +25,7 @@ import { join } from 'path';
       categories: { default: { appenders: ['cheese'], level: 'error' } },
     }),
     GraphQLModule.forRoot({
-      include: [UsersModule],
+      // include: [UsersModule],
       typePaths: ['./**/*.graphql'],
       installSubscriptionHandlers: true,
       definitions: {

@@ -13,7 +13,7 @@ export class UsersResolvers {
   constructor(private readonly usersService: UsersService) {}
 
   @Query()
-  @UseGuards(UsersGuard)
+  // @UseGuards(UsersGuard)
   async getUsers() {
     return await this.usersService.findAll();
   }
