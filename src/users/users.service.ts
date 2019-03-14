@@ -19,6 +19,7 @@ export class UsersService {
   }
 
   create(user: User): User {
+    console.log('@@@', user);
     this.users.push(user);
     return user;
   }

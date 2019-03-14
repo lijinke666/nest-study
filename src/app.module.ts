@@ -11,6 +11,7 @@ import { Log4jsModule, Log4jsInterceptor } from 'nest-log4js';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { HttpExceptionFilter } from './filters/http-exception.filter';
 import { GraphQLModule } from '@nestjs/graphql';
+import { join } from 'path';
 
 // 其实就是 angular 依赖注入
 @Module({
@@ -26,8 +27,11 @@ import { GraphQLModule } from '@nestjs/graphql';
     GraphQLModule.forRoot({
       include: [UsersModule],
       typePaths: ['./**/*.graphql'],
-      debug: false,
-      playground: true,
+      installSubscriptionHandlers: true,
+      definitions: {
+        path: join(process.cwd(), 'src/graphql.schema.ts'),
+        outputAs: 'class',
+      },
     }),
     // TypeOrmModule.forRoot(),      // 会去root 目录 涨到 ormconfig.json 读取配置
     // UsersModule,

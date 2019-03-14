@@ -23,9 +23,21 @@ export class UsersResolvers {
     return await this.usersService.findOneById(id);
   }
 
+  // mutation CreateReviewForEpisode($user: CreateUserInput) {
+  //   createUser(createUserInput: $user) {
+  //     nickname
+  //     phone
+  //   }
+  // }
+
+  //   "user": {
+  //     "nickname": "赵日天",
+  //     "phone": "1233333"
+  //   }
+  // }
   @Mutation('createUser')
   async create(@Args('createUserInput') args: CreateUserDto): Promise<User> {
-    const createdUser = await this.usersService.create(args);
+    const createdUser = this.usersService.create(args);
     pubSub.publish('userCreated', { userCreated: createdUser });
     return createdUser;
   }
