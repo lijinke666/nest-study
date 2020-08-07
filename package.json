@@ -28,7 +28,7 @@
     "@nestjs/typeorm": "^5.3.0",
     "apollo-server-express": "^2.4.8",
     "cache-manager": "^2.9.0",
-    "class-transformer": "^0.2.0",
+    "class-transformer": "^0.3.1",
     "class-validator": "^0.9.1",
     "cookie-parser": "^1.4.4",
     "cross-env": "^5.2.0",
